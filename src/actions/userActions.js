@@ -40,7 +40,11 @@ export const newregister = (userData) => async (dispatch) => {
         "Content-Type": "multipart/form-data",
       },
     };
-    const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/register`, userData, config);
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/api/v1/register`,
+      userData,
+      config
+    );
     dispatch({
       type: REGISTER_USER_SUCCESS,
       payload: data.user,
@@ -59,6 +63,7 @@ export const login = (email, password) => async (dispatch) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
+        withCredentials: true,
       },
     };
     const { data } = await axios.post(
@@ -124,7 +129,11 @@ export const updateProfile = (userData) => async (dispatch) => {
         "Content-Type": "multipart/form-data",
       },
     };
-    const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/me/update`, userData, config);
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_API}/api/v1/me/update`,
+      userData,
+      config
+    );
     dispatch({
       type: UPDATE_PROFILE_SUCCESS,
       payload: data.success,
@@ -173,7 +182,11 @@ export const forgotPassword = (email) => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.post(`${process.env.REACT_APP_API}/api/v1/password/forgot`, email, config);
+    const { data } = await axios.post(
+      `${process.env.REACT_APP_API}/api/v1/password/forgot`,
+      email,
+      config
+    );
 
     dispatch({
       type: FORGOT_PASSWORD_SUCCESS,
@@ -259,7 +272,9 @@ export const verifyEmail = (id, token) => async (dispatch) => {
 export const allUsers = () => async (dispatch) => {
   try {
     dispatch({ type: ALL_USERS_REQUEST });
-    const { data } = await axios.get(`${process.env.REACT_APP_API}/api/v1/admin/users`);
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_API}/api/v1/admin/users`
+    );
     dispatch({
       type: ALL_USERS_SUCCESS,
       payload: data.users,
